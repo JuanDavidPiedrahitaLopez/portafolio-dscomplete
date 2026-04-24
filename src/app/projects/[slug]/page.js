@@ -124,7 +124,7 @@ export default async function ProjectDetailPage({ params }) {
         { name: "SARIMA", sub: "Modelos\nARIMA", Icon: BarChart3, iconColor: "#60a5fa" },
         { name: "XGBoost", sub: "Gradient Boosting\nMachine", Icon: Box, iconColor: "#60a5fa" },
         { name: "Red Neuronal", sub: "Perceptrón\nMulticapa", Icon: Network, iconColor: "#60a5fa" },
-        { name: "NeuralProphet", sub: "Perceptrón\nMulticapa", Icon: BrainCircuit, iconColor: "#60a5fa" },
+        { name: "NeuralProphets", sub: "Perceptrón\nMulticapa", Icon: BrainCircuit, iconColor: "#60a5fa" },
     ];
 
     const metrics = [
