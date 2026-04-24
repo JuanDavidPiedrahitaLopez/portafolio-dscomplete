@@ -43,7 +43,7 @@ export default function Hero() {
                     style={{ paddingLeft: "8%" }}
                 >
                     <p className="text-blue-500 text-xs font-semibold tracking-[0.2em] uppercase">
-                        Matemático · Analista de Datos
+                        Matemático · Analista de Datos · Data Scientist
                     </p>
 
                     <h1
