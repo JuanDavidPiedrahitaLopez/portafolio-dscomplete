@@ -1,10 +1,10 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
   basePath: "/portafolio-dscomplete",
+  assetPrefix: "/portafolio-dscomplete/",
   images: {
     unoptimized: true,
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
