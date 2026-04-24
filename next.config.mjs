@@ -1,10 +1,7 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  basePath: "/portafolio-dscomplete",
-  assetPrefix: "/portafolio-dscomplete/",
-  images: {
-    unoptimized: true,
-  },
+  /* config options here */
+  reactCompiler: true,
 };
 
 export default nextConfig;

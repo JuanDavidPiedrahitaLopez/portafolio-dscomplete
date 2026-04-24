@@ -3,6 +3,12 @@ import { notFound } from "next/navigation";
 import { ExternalLink, Target, Database, Settings, BarChart3, Network, Box, BrainCircuit } from "lucide-react";
 import Link from "next/link";
 
+
+export async function generateStaticParams() {
+    return projects.map((project) => ({
+        slug: project.slug,
+    }));
+}
 // Gráfico simulado SVG inline
 function ForecastChart() {
     const w = 800, h = 220;
