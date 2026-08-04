@@ -41,7 +41,7 @@ export default function BackToTop() {
             onClick={handleClick}
             aria-label={t.backToTop.aria}
             title={t.backToTop.aria}
-            className={`fixed bottom-6 left-6 z-40 flex items-center justify-center w-11 h-11 rounded-full border border-[#1e3a4a] bg-[#0d2231] text-[#2dd4bf] shadow-lg shadow-black/30 transition-all duration-300 hover:border-[#2dd4bf] hover:text-white hover:shadow-[0_0_16px_rgba(45,212,191,0.35)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf] ${
+            className={`fixed bottom-6 right-6 z-40 flex items-center justify-center w-11 h-11 rounded-full border border-[#1e3a4a] bg-[#0d2231] text-[#2dd4bf] shadow-lg shadow-black/30 transition-all duration-300 hover:border-[#2dd4bf] hover:text-white hover:shadow-[0_0_16px_rgba(45,212,191,0.35)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf] ${
                 visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"
             }`}
         >
