@@ -4,6 +4,7 @@ import { User, Target, MessageSquare, BookOpen } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import { useScrollReveal } from "@/lib/useScrollReveal";
+import SectionGlow from "@/components/SectionGlow";
 
 const VALUE_ICONS = { Target, MessageSquare, BookOpen };
 
@@ -16,11 +17,7 @@ export default function About() {
         <section id="sobre-mi"
             className="relative w-full scroll-mt-24 overflow-hidden"
         >
-            {/* Gradiente de fondo — mismo lenguaje visual que el glow de /contacto */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute -top-20 right-0 w-[520px] h-[520px] bg-blue-900/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-[380px] h-[380px] bg-teal-900/10 rounded-full blur-3xl" />
-            </div>
+            <SectionGlow />
 
             <div
                 ref={containerRef}

@@ -7,6 +7,7 @@ import FeaturedProject from "@/components/FeaturedProject";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import { useScrollReveal } from "@/lib/useScrollReveal";
+import SectionGlow from "@/components/SectionGlow";
 
 export default function ProjectsSection() {
     const { lang } = useLanguage();
@@ -16,7 +17,7 @@ export default function ProjectsSection() {
     const containerRef = useScrollReveal("reveal-item", { direction: "left", distance: 40 });
 
     return (
-        <section className="w-full scroll-mt-24" id="proyectos" ref={containerRef} style={{
+        <section className="relative w-full scroll-mt-24 overflow-hidden" id="proyectos" ref={containerRef} style={{
             width: "100%",
             paddingLeft: "8%",
             paddingTop: "2%",
@@ -24,7 +25,9 @@ export default function ProjectsSection() {
             paddingRight: "8%"
         }} >
 
-            <div className="mx-auto max-w-[1144px]">
+            <SectionGlow />
+
+            <div className="relative z-10 mx-auto max-w-[1144px]">
 
                 {/* HEADER */}
                 <div className="reveal-item flex justify-between items-center flex-wrap gap-3 mb-10">
