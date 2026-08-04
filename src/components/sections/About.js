@@ -24,11 +24,10 @@ export default function About() {
 
             <div
                 ref={containerRef}
-                className="relative z-10"
+                className="relative z-10 pt-14 md:pt-[2%]"
                 style={{
                     paddingLeft: "8%",
                     paddingRight: "8%",
-                    paddingTop: "2%",
                     paddingBottom: "2%",
                 }}
             >
