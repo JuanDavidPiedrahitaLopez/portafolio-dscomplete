@@ -13,10 +13,10 @@ export default function Home() {
       <ScrollToHash />
       <Hero />
       <About />
+      <Education />
       <ProjectsSection />
       <ResearchSection />
       <ExperienceSection />
-      <Education />
       <Skills />
     </main>
   );

@@ -4,10 +4,10 @@ export const translations = {
             links: [
                 { label: "Inicio", id: "inicio" },
                 { label: "Sobre mí", id: "sobre-mi" },
+                { label: "Educación", id: "educacion" },
                 { label: "Proyectos", id: "proyectos" },
                 { label: "Investigación", id: "investigacion" },
                 { label: "Experiencia", id: "experiencia" },
-                { label: "Educación", id: "educacion" },
             ],
             contact: "Contacto",
             menuAria: "Menú",
@@ -209,10 +209,10 @@ export const translations = {
             links: [
                 { label: "Home", id: "inicio" },
                 { label: "About me", id: "sobre-mi" },
+                { label: "Education", id: "educacion" },
                 { label: "Projects", id: "proyectos" },
                 { label: "Research", id: "investigacion" },
                 { label: "Experience", id: "experiencia" },
-                { label: "Education", id: "educacion" },
             ],
             contact: "Contact",
             menuAria: "Menu",
