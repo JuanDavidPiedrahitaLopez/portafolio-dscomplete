@@ -52,7 +52,7 @@ export default function Hero() {
 
                 {/* IZQUIERDA */}
                 <div
-                    className="hero-item flex flex-col gap-4 sm:gap-5 md:gap-6 z-10 relative w-full md:w-[50%] pr-5 md:pr-0"
+                    className="hero-item flex flex-col gap-4 sm:gap-5 md:gap-6 z-10 relative w-full md:w-[58%] pr-5 md:pr-8"
                     style={{ paddingLeft: "8%" }}
                 >
                     {/* Áreas de especialización — lista estática, no una animación de cargos alternantes */}
@@ -78,7 +78,7 @@ export default function Hero() {
                         ))}
                     </p>
 
-                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-[480px] min-h-[3lh]">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-[480px] md:max-w-[620px] min-h-[3lh]">
                         {t.hero.description}
                     </p>
 
@@ -126,7 +126,7 @@ export default function Hero() {
                 </div>
 
                 {/* DERECHA — espacio para ver la imagen */}
-                <div className="hidden md:block md:w-[50%]" />
+                <div className="hidden md:block md:w-[42%]" />
             </div>
 
             {/* CARDS — fuera del div con la imagen, fondo sólido */}
