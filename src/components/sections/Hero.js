@@ -117,7 +117,7 @@ export default function Hero() {
                                 scrollToSection("investigacion");
                                 window.history.replaceState(null, "", "#investigacion");
                             }}
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2dd4bf] border-2 border-[#2dd4bf]/40 bg-[#0d2231]/95 rounded-full px-4 h-[38px] transition-all duration-300 hover:border-[#2dd4bf] hover:bg-[#0f2b38] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf]"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2dd4bf] border-2 border-[#2dd4bf]/40 bg-[#0d2231]/95 px-4 h-[38px] transition-all duration-300 hover:border-[#2dd4bf] hover:bg-[#0f2b38] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf]"
                         >
                             {t.hero.ctaResearch} →
                         </a>
