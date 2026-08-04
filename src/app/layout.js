@@ -2,11 +2,30 @@ import "./globals.css";
 import Navbar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { siteConfig } from "@/config/site";
+
+const title = `${siteConfig.name} | Analítica, BI y modelación predictiva`;
 
 export const metadata = {
-  title: "Juan David | Matemático & Data Scientist",
-  description:
-    "Portafolio de Juan David — matemático aplicado a analítica, BI y modelos de predicción.",
+  title: {
+    default: title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  authors: [{ name: siteConfig.name }],
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    locale: "es_CO",
+    siteName: siteConfig.name,
+    title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: siteConfig.description,
+  },
 };
 
 export default function RootLayout({ children }) {

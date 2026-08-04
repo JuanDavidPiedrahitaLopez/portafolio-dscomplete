@@ -14,7 +14,7 @@ export default function About() {
 
     return (
         <section id="sobre-mi"
-            className="relative w-full mb-20 scroll-mt-24 overflow-hidden"
+            className="relative w-full scroll-mt-24 overflow-hidden"
         >
             {/* Gradiente de fondo — mismo lenguaje visual que el glow de /contacto */}
             <div className="absolute inset-0 pointer-events-none">

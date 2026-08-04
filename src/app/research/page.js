@@ -5,10 +5,12 @@ import { articles } from "@/data/articles";
 import ArticleCard from "./ArticleCard";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 export default function AllArticlesPage() {
     const { lang } = useLanguage();
     const t = translations[lang];
+    const containerRef = useScrollReveal("reveal-item", { direction: "left", distance: 40 });
 
     return (
         <section className="bg-[#06080d] min-h-screen relative overflow-hidden">
@@ -19,6 +21,7 @@ export default function AllArticlesPage() {
             </div>
 
             <div
+                ref={containerRef}
                 className="w-full relative z-10"
                 style={{
                     paddingLeft: "8%",
@@ -39,7 +42,7 @@ export default function AllArticlesPage() {
                 </div>
 
                 {/* Encabezado */}
-                <div className="mb-16">
+                <div className="reveal-item mb-16">
                     <p className="text-blue-500 text-xs font-semibold tracking-[0.2em] uppercase mb-4">
                         {t.allArticles.eyebrow}
                     </p>
@@ -57,7 +60,7 @@ export default function AllArticlesPage() {
                 {/* GRID */}
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),360px))] justify-center gap-8">
                     {articles.map((article) => (
-                        <div key={article.id} className="w-full">
+                        <div key={article.id} className="reveal-item w-full">
                             <ArticleCard article={article} />
                         </div>
                     ))}

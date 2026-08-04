@@ -5,13 +5,15 @@ import { articles } from "@/data/articles";
 import ArticleCard from "./ArticleCard";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 export default function ResearchSection() {
     const { lang } = useLanguage();
     const t = translations[lang];
+    const containerRef = useScrollReveal("reveal-item", { direction: "left", distance: 40 });
 
     return (
-        <section className="w-full scroll-mt-24" id="investigacion" style={{
+        <section className="w-full scroll-mt-24" id="investigacion" ref={containerRef} style={{
             width: "100%",
             paddingLeft: "8%",
             paddingTop: "2%",
@@ -22,7 +24,7 @@ export default function ResearchSection() {
             <div className="mx-auto">
 
                 {/* HEADER */}
-                <div className="flex justify-between items-center flex-wrap gap-3 mb-10">
+                <div className="reveal-item flex justify-between items-center flex-wrap gap-3 mb-10">
                     <h2 className="text-white font-bold text-[28px]">
                         {t.researchSection.title}
                     </h2>
@@ -38,7 +40,7 @@ export default function ResearchSection() {
                 {/* GRID */}
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),360px))] justify-center gap-8">
                     {articles.map((article) => (
-                        <div key={article.id} className="w-full">
+                        <div key={article.id} className="reveal-item w-full">
                             <ArticleCard article={article} />
                         </div>
                     ))}

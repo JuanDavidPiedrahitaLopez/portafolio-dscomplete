@@ -2,6 +2,7 @@ const THEMES = {
     forecast: { from: "#0d2848", to: "#0a0f1a", accent: "#60a5fa", accent2: "#2dd4bf" },
     dashboard: { from: "#1b1338", to: "#0a0f1a", accent: "#a78bfa", accent2: "#60a5fa" },
     pipeline: { from: "#0a2a2e", to: "#0a0f1a", accent: "#2dd4bf", accent2: "#60a5fa" },
+    medallion: { from: "#12203f", to: "#0a0f1a", accent: "#60a5fa", accent2: "#F2C94C" },
 };
 
 // El contenido relevante de cada ilustración se mantiene dentro de la franja
@@ -69,7 +70,33 @@ function PipelineArt({ accent, accent2 }) {
     );
 }
 
-const ART = { forecast: ForecastArt, dashboard: DashboardArt, pipeline: PipelineArt };
+function MedallionArt({ accent, accent2 }) {
+    // Arquitectura por capas (bronze / silver / gold), representada de forma abstracta.
+    const bands = [
+        { y: 50, color: "#b08d57" },
+        { y: 125, color: "#9ca3af" },
+        { y: 200, color: accent2 },
+    ];
+    return (
+        <>
+            {bands.map((b, i) => (
+                <rect key={i} x="380" y={b.y} width="440" height="34" rx="8" fill={b.color} opacity="0.88" />
+            ))}
+            {[0, 1].map((i) => (
+                <path
+                    key={i}
+                    d={`M595,${84 + i * 75} L605,${99 + i * 75} L615,${84 + i * 75}`}
+                    fill="none" stroke={accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
+                />
+            ))}
+            {[67, 142, 217].map((cy, i) => (
+                <circle key={i} cx="760" cy={cy} r="6" fill="#0a0f1a" stroke={accent} strokeWidth="2" />
+            ))}
+        </>
+    );
+}
+
+const ART = { forecast: ForecastArt, dashboard: DashboardArt, pipeline: PipelineArt, medallion: MedallionArt };
 
 export default function ProjectThumbnail({ variant = "forecast", className = "" }) {
     const theme = THEMES[variant] ?? THEMES.forecast;
@@ -81,7 +108,7 @@ export default function ProjectThumbnail({ variant = "forecast", className = "" 
             className={`relative h-full w-full overflow-hidden ${className}`}
             style={{ background: `linear-gradient(160deg, ${theme.from} 0%, ${theme.to} 100%)` }}
         >
-            <svg viewBox="0 0 1200 260" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
+            <svg viewBox="0 0 1200 260" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <Art id={gradId} accent={theme.accent} accent2={theme.accent2} />
             </svg>
         </div>

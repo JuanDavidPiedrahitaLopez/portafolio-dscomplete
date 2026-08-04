@@ -5,21 +5,18 @@ import { BriefcaseBusiness } from "lucide-react";
 import { experiences } from "@/data/experience";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
-
-function getLocalized(value, lang) {
-    return typeof value === "string" ? value : value[lang];
-}
+import ExperienceItem from "@/components/ExperienceItem";
 
 // Estilos de animación inyectados una sola vez
 const ANIMATION_CSS = `
   .exp-item {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateX(-48px);
     transition: opacity 0.55s ease, transform 0.55s ease;
   }
   .exp-item.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
   /* Línea horizontal desktop animada */
   .exp-timeline-line {
@@ -59,6 +56,17 @@ const ANIMATION_CSS = `
   .exp-vline.visible {
     transform: scaleY(1);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exp-item, .exp-timeline-line, .exp-dot, .exp-dot-mobile, .exp-vline {
+      transition-duration: 0.01ms !important;
+    }
+    .exp-item { transform: none !important; }
+    .exp-timeline-line { transform: scaleX(1) !important; }
+    .exp-dot { transform: translate(-50%, -50%) scale(1) !important; }
+    .exp-dot-mobile { transform: scale(1) !important; }
+    .exp-vline { transform: scaleY(1) !important; }
+  }
 `;
 
 function injectStyles() {
@@ -68,31 +76,6 @@ function injectStyles() {
     el.id = "exp-anim-styles";
     el.textContent = ANIMATION_CSS;
     document.head.appendChild(el);
-}
-
-function Descriptions({ items }) {
-    if (!items?.length) return null;
-    if (items.length === 1) {
-        return (
-            <p style={{ fontSize: "13px", color: "#9ca3af", lineHeight: "1.65" }}>
-                {items[0]}
-            </p>
-        );
-    }
-    return (
-        <ul style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {items.map((d, i) => (
-                <li
-                    key={i}
-                    className="flex items-start gap-1.5"
-                    style={{ fontSize: "13px", color: "#9ca3af", lineHeight: "1.65" }}
-                >
-                    <span style={{ color: "#2dd4bf", marginTop: "1px", flexShrink: 0 }}>·</span>
-                    {d}
-                </li>
-            ))}
-        </ul>
-    );
 }
 
 export default function ExperienceSection() {
@@ -170,7 +153,7 @@ export default function ExperienceSection() {
                 />
 
                 <div className="grid grid-cols-4 gap-8">
-                    {experiences.map(({ period, title, descriptions, Icon }, i) => (
+                    {experiences.map((experience, i) => (
                         <div
                             key={i}
                             className="exp-item group flex flex-col gap-2"
@@ -194,17 +177,14 @@ export default function ExperienceSection() {
                                     }}
                                 />
                                 <div className="relative z-[2] flex w-12 h-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#1e3a4a] bg-[#0d2231] transition-all duration-300 group-hover:border-[#2dd4bf]/70 group-hover:shadow-[0_0_16px_rgba(45,212,191,0.25)] group-hover:-translate-y-0.5">
-                                    <Icon size={20} color="#2dd4bf" strokeWidth={1.8} />
+                                    <experience.Icon size={20} color="#2dd4bf" strokeWidth={1.8} />
                                 </div>
                             </div>
-                            <span style={{ fontSize: "12px", color: "#6b7280" }}>{getLocalized(period, lang)}</span>
-                            <h3
-                                className="text-white font-bold leading-snug transition-colors duration-300 group-hover:text-[#2dd4bf]"
-                                style={{ fontSize: "15px" }}
-                            >
-                                {getLocalized(title, lang)}
-                            </h3>
-                            <Descriptions items={getLocalized(descriptions, lang)} />
+                            <ExperienceItem
+                                experience={experience}
+                                lang={lang}
+                                headingClassName="transition-colors duration-300 group-hover:text-[#2dd4bf]"
+                            />
                         </div>
                     ))}
                 </div>
@@ -212,7 +192,7 @@ export default function ExperienceSection() {
 
             {/* ── MOBILE: timeline vertical ── */}
             <div className="flex lg:hidden flex-col" style={{ gap: "32px" }}>
-                {experiences.map(({ period, title, descriptions, Icon }, i) => (
+                {experiences.map((experience, i) => (
                     <div key={i} className="flex gap-4">
                         {/* Columna izquierda: punto + línea */}
                         <div
@@ -249,16 +229,9 @@ export default function ExperienceSection() {
                             data-delay={i * 150 + 80}
                         >
                             <div className="flex w-11 h-11 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#1e3a4a] bg-[#0d2231] transition-all duration-300 group-active:border-[#2dd4bf]/70">
-                                <Icon size={18} color="#2dd4bf" strokeWidth={1.8} />
+                                <experience.Icon size={18} color="#2dd4bf" strokeWidth={1.8} />
                             </div>
-                            <span style={{ fontSize: "12px", color: "#6b7280" }}>{getLocalized(period, lang)}</span>
-                            <h3
-                                className="text-white font-bold leading-snug"
-                                style={{ fontSize: "15px" }}
-                            >
-                                {getLocalized(title, lang)}
-                            </h3>
-                            <Descriptions items={getLocalized(descriptions, lang)} />
+                            <ExperienceItem experience={experience} lang={lang} />
                         </div>
                     </div>
                 ))}

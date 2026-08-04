@@ -1,8 +1,21 @@
+// AVISO: los 3 artículos de este archivo son contenido ilustrativo de
+// ejemplo (redactado durante el desarrollo del sitio, no investigación
+// real publicada). Por eso quedan marcados type:"article" y
+// status:"draft", sin institución, autores, DOI ni año — nunca deben
+// presentarse como una publicación arbitrada. Reemplázalos por
+// investigación real o elimínalos. Ver CONTENT_TODO.md.
 export const articles = [
     {
         id: 1,
         slug: "sarima-vs-redes-neuronales-series-cortas",
-        date: "2024",
+        type: "article",
+        status: "draft",
+        institution: "",
+        year: "",
+        authors: [],
+        advisor: "",
+        doi: null,
+        links: { documentationUrl: "", repositoryUrl: "" },
         es: {
             title: "SARIMA vs. redes neuronales en series de tiempo cortas",
             excerpt:
@@ -39,7 +52,14 @@ export const articles = [
     {
         id: 2,
         slug: "optimizacion-bayesiana-hiperparametros-forecasting",
-        date: "2024",
+        type: "article",
+        status: "draft",
+        institution: "",
+        year: "",
+        authors: [],
+        advisor: "",
+        doi: null,
+        links: { documentationUrl: "", repositoryUrl: "" },
         es: {
             title: "Optimización bayesiana para modelos de forecasting",
             excerpt:
@@ -76,7 +96,14 @@ export const articles = [
     {
         id: 3,
         slug: "modelado-semantico-eficiente-powerbi",
-        date: "2023",
+        type: "article",
+        status: "draft",
+        institution: "",
+        year: "",
+        authors: [],
+        advisor: "",
+        doi: null,
+        links: { documentationUrl: "", repositoryUrl: "" },
         es: {
             title: "Modelado semántico eficiente en Power BI",
             excerpt:

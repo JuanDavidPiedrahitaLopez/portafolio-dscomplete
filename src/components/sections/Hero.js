@@ -1,21 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import { Download } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import { scrollToSection } from "@/lib/scrollToSection";
+import { siteConfig } from "@/config/site";
+import Button from "@/components/Button";
+import SocialLinks from "@/components/SocialLinks";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 export default function Hero() {
     const { lang } = useLanguage();
     const t = translations[lang];
+    const containerRef = useScrollReveal("hero-item", { direction: "left", distance: 40 });
 
     return (
-        <section id="inicio" className="bg-[#06080d] overflow-hidden h-full scroll-mt-24">
+        <section id="inicio" ref={containerRef} className="bg-[#06080d] overflow-hidden h-full scroll-mt-24">
 
             {/* HERO — imagen confinada aquí */}
             <div
-                className="w-full relative flex flex-col md:flex-row items-center justify-between min-h-[400px] overflow-hidden"
-                style={{ paddingTop: "5rem", paddingBottom: "4rem" }}
+                className="w-full relative flex flex-col md:flex-row items-center justify-between min-h-[360px] md:min-h-[400px] overflow-hidden pt-14 pb-8 md:pt-20 md:pb-16"
             >
                 {/* IMAGEN DE FONDO — solo en el hero */}
                 <div className="absolute inset-0 z-0">
@@ -47,47 +52,64 @@ export default function Hero() {
 
                 {/* IZQUIERDA */}
                 <div
-                    className="flex flex-col gap-6 z-10 relative w-full md:w-[50%] pr-5 md:pr-0"
+                    className="hero-item flex flex-col gap-4 sm:gap-5 md:gap-6 z-10 relative w-full md:w-[50%] pr-5 md:pr-0"
                     style={{ paddingLeft: "8%" }}
                 >
-                    <p className="text-blue-500 text-xs font-semibold tracking-[0.2em] uppercase">
+                    {/* Áreas de especialización — lista estática, no una animación de cargos alternantes */}
+                    <p className="text-blue-500 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase min-h-[1lh]">
                         {t.hero.eyebrow}
                     </p>
 
-                    <h1
-                        className="text-white font-bold leading-tight"
-                        style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)" }}
-                    >
-                        {t.hero.titleParts.map((part, i) =>
-                            part.break ? (
-                                <br key={i} />
-                            ) : (
-                                <span key={i} className={part.highlight ? "text-blue-400" : undefined}>
-                                    {part.text}
-                                </span>
-                            )
-                        )}
+                    {/* Nombre — único h1 de la página */}
+                    <h1 className="text-white font-bold leading-tight text-[1.6rem] sm:text-3xl md:text-4xl">
+                        {t.hero.name}
                     </h1>
 
-                    <p className="text-gray-400 text-base leading-relaxed max-w-[480px]">
+                    {/* Posicionamiento profesional */}
+                    {/* min-h reserva el mismo espacio en ES/EN aunque el texto envuelva distinto número de líneas */}
+                    <p
+                        className="font-bold leading-tight text-white min-h-[2lh]"
+                        style={{ fontSize: "clamp(1.5rem, 4.5vw, 2.6rem)" }}
+                    >
+                        {t.hero.titleParts.map((part, i) => (
+                            <span key={i} className={part.highlight ? "text-blue-400" : undefined}>
+                                {part.text}
+                            </span>
+                        ))}
+                    </p>
+
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-[480px] min-h-[3lh]">
                         {t.hero.description}
                     </p>
 
                     {/* BOTONES */}
-                    <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full md:w-auto items-start">
-                        <a
+                    <div className="flex flex-col sm:flex-row gap-3 mt-1 w-full md:w-auto items-start">
+                        <Button
                             href="#proyectos"
+                            variant="primary"
                             onClick={(e) => {
                                 e.preventDefault();
                                 scrollToSection("proyectos");
                                 window.history.replaceState(null, "", "#proyectos");
                             }}
-                            className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 h-[44px]
-                            w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px]
-                            rounded-md text-sm font-medium transition-all duration-200">
+                            className="w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px]"
+                        >
                             {t.hero.ctaProjects}
-                        </a>
+                        </Button>
 
+                        <Button
+                            href={siteConfig.cvPath[lang]}
+                            variant="secondary"
+                            download
+                            className="w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px]"
+                        >
+                            <Download size={16} strokeWidth={2} />
+                            {t.hero.ctaCV}
+                        </Button>
+                    </div>
+
+                    {/* Investigación + redes */}
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                         <a
                             href="#investigacion"
                             onClick={(e) => {
@@ -95,11 +117,11 @@ export default function Hero() {
                                 scrollToSection("investigacion");
                                 window.history.replaceState(null, "", "#investigacion");
                             }}
-                            className="flex items-center justify-center gap-2 border border-gray-600 hover:border-blue-500 hover:bg-[#0f1623] text-gray-300 hover:text-white px-6 h-[44px]
-                            w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px]
-                            rounded-md text-sm font-medium transition-all duration-200">
-                            {t.hero.ctaResearch}
+                            className="text-sm font-medium text-[#4aa3ff] hover:text-blue-300 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
+                        >
+                            {t.hero.ctaResearch} →
                         </a>
+                        <SocialLinks />
                     </div>
                 </div>
 
@@ -120,7 +142,7 @@ export default function Hero() {
                 {t.hero.cards.map((card, i) => (
                     <div
                         key={i}
-                        className="flex items-center gap-5 px-6 py-5 rounded-xl border border-[#1a2235] bg-[#080c14] min-h-[110px] transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1"
+                        className="hero-item flex items-center gap-5 px-6 py-5 rounded-xl border border-[#1a2235] bg-[#080c14] min-h-[110px] transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1"
                         style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "2rem", paddingBottom: "2.5rem" }}
                     >
                         <div className="w-14 h-14 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0 transition-colors duration-300">
@@ -129,7 +151,7 @@ export default function Hero() {
                             </span>
                         </div>
                         <div className="flex flex-col gap-1 min-w-0">
-                            <p className="text-white text-sm font-semibold">{card.title}</p>
+                            <h3 className="text-white text-sm font-semibold">{card.title}</h3>
                             <p className="text-gray-400 text-xs leading-relaxed">
                                 {card.description}
                             </p>

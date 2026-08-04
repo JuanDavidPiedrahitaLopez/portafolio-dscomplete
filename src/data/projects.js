@@ -1,9 +1,24 @@
+// Fuente central de datos de proyectos. Los campos vacíos ("", [], null)
+// son intencionales: no se inventa información (fechas, enlaces,
+// métricas) que no ha sido confirmada. Ver CONTENT_TODO.md.
 export const projects = [
     {
         id: 1,
         slug: "forecasting-demanda-energetica",
-        image: "",
         thumbnail: "forecast",
+        category: "machineLearning",
+        status: "completed",
+        featured: true,
+        year: "", // PLACEHOLDER: confirmar año real del proyecto
+        architectureImage: "",
+        links: {
+            repositoryUrl: "",
+            demoUrl: "",
+            documentationUrl: "",
+            articleUrl: "",
+            dataSourceUrl: "",
+        },
+        metrics: [], // PLACEHOLDER: sin métricas verificadas todavía
         es: {
             title: "Forecasting de demanda energética",
             description:
@@ -14,6 +29,8 @@ export const projects = [
                     "Este proyecto compara distintos modelos de pronóstico aplicados a series reales de demanda energética.",
                 problem:
                     "Se buscó evaluar qué enfoques ofrecen mejor desempeño predictivo bajo validación temporal.",
+                dataUsed:
+                    "Series históricas de demanda energética. [PLACEHOLDER: confirmar fuente y periodo exactos del dataset.]",
                 technologies: ["Python", "pandas", "statsmodels", "XGBoost", "Optuna"],
                 features: [
                     "Comparación simultánea de modelos estadísticos y de machine learning.",
@@ -31,6 +48,10 @@ export const projects = [
                     "Comparación clara entre enfoques clásicos y ML.",
                     "Identificación de fortalezas y debilidades de cada modelo.",
                 ],
+                limitations:
+                    "[PLACEHOLDER: describir limitaciones reales conocidas, ej. tamaño de la muestra o generalización a otras series.]",
+                learnings:
+                    "[PLACEHOLDER: agregar aprendizajes concretos obtenidos durante el proyecto.]",
                 conclusions:
                     "El proyecto permitió contrastar rigurosamente métodos tradicionales y de machine learning en forecasting.",
             },
@@ -45,6 +66,8 @@ export const projects = [
                     "This project compares different forecasting models applied to real energy demand time series.",
                 problem:
                     "The goal was to evaluate which approaches offer the best predictive performance under time-based validation.",
+                dataUsed:
+                    "Historical energy demand series. [PLACEHOLDER: confirm the exact dataset source and time range.]",
                 technologies: ["Python", "pandas", "statsmodels", "XGBoost", "Optuna"],
                 features: [
                     "Side-by-side comparison of statistical and machine learning models.",
@@ -62,6 +85,10 @@ export const projects = [
                     "Clear comparison between classical and ML approaches.",
                     "Identification of strengths and weaknesses of each model.",
                 ],
+                limitations:
+                    "[PLACEHOLDER: describe known real limitations, e.g. sample size or generalization to other series.]",
+                learnings:
+                    "[PLACEHOLDER: add concrete learnings from the project.]",
                 conclusions:
                     "The project allowed a rigorous comparison of traditional and machine learning methods in forecasting.",
             },
@@ -71,8 +98,20 @@ export const projects = [
     {
         id: 2,
         slug: "dashboard-financiero-powerbi",
-        image: "",
         thumbnail: "dashboard",
+        category: "bi",
+        status: "completed",
+        featured: false,
+        year: "", // PLACEHOLDER
+        architectureImage: "",
+        links: {
+            repositoryUrl: "",
+            demoUrl: "",
+            documentationUrl: "",
+            articleUrl: "",
+            dataSourceUrl: "",
+        },
+        metrics: [],
         es: {
             title: "Dashboard financiero en Power BI",
             description:
@@ -140,8 +179,20 @@ export const projects = [
     {
         id: 3,
         slug: "pipeline-datos-azure",
-        image: "",
         thumbnail: "pipeline",
+        category: "dataEngineering",
+        status: "completed",
+        featured: false,
+        year: "", // PLACEHOLDER
+        architectureImage: "",
+        links: {
+            repositoryUrl: "",
+            demoUrl: "",
+            documentationUrl: "",
+            articleUrl: "",
+            dataSourceUrl: "",
+        },
+        metrics: [],
         es: {
             title: "Pipeline de datos en Azure",
             description:
@@ -218,6 +269,91 @@ export const projects = [
                 ],
                 conclusions:
                     "The pipeline provided a solid foundation for advanced analytics and made it easier to integrate new data sources.",
+            },
+        },
+    },
+
+    {
+        id: 4,
+        slug: "pipeline-datos-energia-alemania",
+        thumbnail: "medallion",
+        category: "dataEngineering",
+        status: "inProgress",
+        featured: false,
+        year: "",
+        architectureImage: "", // PLACEHOLDER: agregar diagrama bronze/silver/gold cuando exista
+        links: {
+            repositoryUrl: "",
+            demoUrl: "",
+            documentationUrl: "",
+            articleUrl: "",
+            dataSourceUrl: "https://www.smard.de/",
+        },
+        metrics: [],
+        es: {
+            title: "Pipeline de datos energéticos de Alemania (SMARD)",
+            description:
+                "Ingesta y procesamiento de datos energéticos alemanes con arquitectura bronze/silver/gold. Proyecto en desarrollo.",
+            tags: ["Python", "PySpark", "Databricks", "Microsoft Fabric", "Delta Lake"],
+            content: {
+                overview:
+                    "Pipeline de ingeniería de datos orientado a consumir datos energéticos públicos de Alemania (SMARD / Bundesnetzagentur) y estructurarlos siguiendo una arquitectura por capas (bronze, silver, gold) para análisis posterior.",
+                problem:
+                    "Se busca contar con un flujo reproducible que extraiga datos energéticos desde la API/endpoint de SMARD, los almacene de forma confiable y los deje listos para analítica, evitando procesos manuales.",
+                dataUsed:
+                    "Datos públicos de energía de Alemania publicados por SMARD / Bundesnetzagentur, vía su API o endpoint de consulta.",
+                technologies: ["Python", "PySpark", "Databricks", "Microsoft Fabric", "Delta Lake", "SQL"],
+                features: [
+                    "Extracción programada desde el endpoint de SMARD / Bundesnetzagentur.",
+                    "Almacenamiento de datos crudos previo a cualquier transformación.",
+                    "Transformaciones con Python/PySpark organizadas en capas bronze, silver y gold.",
+                    "Tablas Delta como formato de almacenamiento intermedio y final.",
+                ],
+                process: [
+                    "Definición del endpoint y esquema de consulta de la API de SMARD.",
+                    "Diseño de la arquitectura de capas (bronze, silver, gold) en Databricks / Microsoft Fabric.",
+                    "Implementación de transformaciones con PySpark.",
+                    "Definición de estrategia de orquestación y control de calidad de datos.",
+                ],
+                results: [],
+                limitations:
+                    "Proyecto en desarrollo: todavía no hay resultados ni métricas finales que reportar.",
+                learnings:
+                    "[PLACEHOLDER: agregar aprendizajes concretos a medida que avance el proyecto.]",
+                conclusions: "",
+            },
+        },
+        en: {
+            title: "Germany energy data pipeline (SMARD)",
+            description:
+                "Ingestion and processing of German energy data with a bronze/silver/gold architecture. Project in progress.",
+            tags: ["Python", "PySpark", "Databricks", "Microsoft Fabric", "Delta Lake"],
+            content: {
+                overview:
+                    "Data engineering pipeline focused on consuming Germany's public energy data (SMARD / Bundesnetzagentur) and structuring it using a layered (bronze, silver, gold) architecture for later analysis.",
+                problem:
+                    "The goal is to have a reproducible flow that extracts energy data from the SMARD API/endpoint, stores it reliably, and prepares it for analytics, avoiding manual processes.",
+                dataUsed:
+                    "Public German energy data published by SMARD / Bundesnetzagentur, via its API or query endpoint.",
+                technologies: ["Python", "PySpark", "Databricks", "Microsoft Fabric", "Delta Lake", "SQL"],
+                features: [
+                    "Scheduled extraction from the SMARD / Bundesnetzagentur endpoint.",
+                    "Raw data storage prior to any transformation.",
+                    "Python/PySpark transformations organized into bronze, silver, and gold layers.",
+                    "Delta tables as the intermediate and final storage format.",
+                ],
+                process: [
+                    "Definition of the SMARD API endpoint and query schema.",
+                    "Design of the layered architecture (bronze, silver, gold) in Databricks / Microsoft Fabric.",
+                    "Implementation of transformations with PySpark.",
+                    "Definition of orchestration strategy and data quality checks.",
+                ],
+                results: [],
+                limitations:
+                    "Project in progress: there are no final results or metrics to report yet.",
+                learnings:
+                    "[PLACEHOLDER: add concrete learnings as the project progresses.]",
+                conclusions: "",
             },
         },
     },

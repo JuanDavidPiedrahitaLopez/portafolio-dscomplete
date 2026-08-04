@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
@@ -14,6 +14,7 @@ export default function Navbar() {
     const { lang } = useLanguage();
     const t = translations[lang];
     const links = t.nav.links;
+    const burgerRef = useRef(null);
 
     const pathname = usePathname();
     const isHome = pathname === "/";
@@ -27,6 +28,27 @@ export default function Navbar() {
             window.history.replaceState(null, "", `#${id}`);
         }
     };
+
+    // Menú móvil: cerrar con Escape, devolver el foco y bloquear el scroll de fondo.
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        document.body.style.overflow = "hidden";
+
+        const onKeyDown = (e) => {
+            if (e.key === "Escape") {
+                setMenuOpen(false);
+                burgerRef.current?.focus();
+            }
+        };
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.body.style.overflow = "";
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [menuOpen]);
+
     useEffect(() => {
         if (pathname !== "/") return;
 
@@ -64,7 +86,7 @@ export default function Navbar() {
                     <Link
                         href={pathname === "/" ? "#inicio" : "/"}
                         onClick={handleNavClick("inicio")}
-                        className="text-blue-500 font-extrabold text-2xl tracking-tight leading-none transition-opacity duration-200 hover:opacity-80"
+                        className="text-blue-500 font-extrabold text-2xl tracking-tight leading-none transition-opacity duration-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
                     >
                         JD
                     </Link>
@@ -82,6 +104,7 @@ export default function Navbar() {
                                 <Link
                                     href={pathname === "/" ? `#${link.id}` : `/#${link.id}`}
                                     onClick={handleNavClick(link.id)}
+                                    className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
                                 >{link.label}</Link>
                             </span>
                             <div className={`mt-[6px] flex flex-col items-center transition-all duration-300 ${isHome && active === link.id ? "opacity-100 scale-100" : "opacity-0 scale-75"}`}>
@@ -101,7 +124,7 @@ export default function Navbar() {
                     {/* Botón contacto - solo desktop */}
                     <Link
                         href="/contacto"
-                        className="hidden lg:flex items-center gap-2 border border-gray-600 px-4 h-[36px] rounded-md text-sm text-gray-300 hover:text-white hover:border-blue-500 hover:bg-[#0f1623] transition-all duration-200 min-w-[140px] justify-center"
+                        className="hidden lg:flex items-center gap-2 border border-gray-600 px-4 h-[36px] rounded-md text-sm text-gray-300 hover:text-white hover:border-blue-500 hover:bg-[#0f1623] transition-all duration-200 min-w-[140px] justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >
                         {t.nav.contact}
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
@@ -111,9 +134,12 @@ export default function Navbar() {
 
                     {/* Burger - solo mobile */}
                     <button
-                        className="lg:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8"
-                        onClick={() => setMenuOpen(!menuOpen)}
+                        ref={burgerRef}
+                        className="lg:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
+                        onClick={() => setMenuOpen((open) => !open)}
                         aria-label={t.nav.menuAria}
+                        aria-expanded={menuOpen}
+                        aria-controls="mobile-menu"
                     >
                         <span className={`block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
                         <span className={`block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
@@ -124,14 +150,17 @@ export default function Navbar() {
             </div>
 
             {/* MENÚ MOBILE desplegable */}
-            <div className={`lg:hidden absolute overflow-hidden w-[100vw] transition-all duration-300 ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+            <div
+                id="mobile-menu"
+                className={`lg:hidden absolute overflow-hidden w-[100vw] transition-all duration-300 ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+            >
                 <nav className="flex flex-col border-t border-[#111827] bg-[#06080d]" style={{ paddingLeft: "15%", paddingRight: "8%", paddingBottom: "8%" }}>
                     {links.map((link) => (
                         <Link
                             key={link.id}
                             href={pathname === "/" ? `#${link.id}` : `/#${link.id}`}
                             onClick={handleNavClick(link.id)}
-                            className="flex items-center justify-between py-5 border-b border-[#111827] transition-colors duration-200"
+                            className="flex items-center justify-between py-5 border-b border-[#111827] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                             style={{ paddingTop: "1rem", paddingBottom: "1rem" }}
                         >
                             <span className={`text-sm font-medium tracking-wide transition-colors duration-200 ${isHome && active === link.id ? "text-blue-400" : "text-gray-400"}`}>
@@ -148,7 +177,7 @@ export default function Navbar() {
                         <Link
                             onClick={() => setMenuOpen(false)}
                             href="/contacto"
-                            className="flex items-center gap-2 border border-gray-600 px-4 h-[36px] rounded-md text-sm text-gray-300 hover:text-white hover:border-blue-500 hover:bg-[#0f1623] transition-all duration-200 w-full justify-center"
+                            className="flex items-center gap-2 border border-gray-600 px-4 h-[36px] rounded-md text-sm text-gray-300 hover:text-white hover:border-blue-500 hover:bg-[#0f1623] transition-all duration-200 w-full justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                         >
                             {t.nav.contact}
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>

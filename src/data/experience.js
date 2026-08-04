@@ -1,61 +1,90 @@
 import { GraduationCap, BarChart2, Code2, Cloud } from "lucide-react";
 
+// PLACEHOLDER: "company" y "location" quedan vacíos porque no se
+// confirmaron nombres de empresa ni ubicación reales para estos roles.
+// Ver CONTENT_TODO.md.
 export const experiences = [
     {
-        period: "2021 – 2022",
         Icon: GraduationCap,
-        title: { es: "Docencia Universitaria", en: "University Teaching" },
-        descriptions: {
+        company: "",
+        location: "",
+        startDate: "2021",
+        endDate: "2022",
+        role: { es: "Docencia Universitaria", en: "University Teaching" },
+        technologies: [],
+        achievements: {
             es: [
-                "Profesor de matemáticas y física.",
-                "Desarrollo de materiales y formación académica.",
+                "Impartí clases de matemáticas y física a nivel universitario.",
+                "Desarrollé materiales didácticos y contenidos de formación académica.",
+                "[Agregar logro verificable adicional de este rol.]",
             ],
             en: [
-                "Mathematics and physics professor.",
-                "Development of teaching materials and academic training.",
+                "Taught mathematics and physics at the university level.",
+                "Developed teaching materials and academic training content.",
+                "[Add a verifiable achievement for this role.]",
             ],
         },
     },
     {
-        period: "2023 – 2023",
         Icon: BarChart2,
-        title: { es: "Analista de Datos", en: "Data Analyst" },
-        descriptions: {
+        company: "",
+        location: "",
+        startDate: "2023",
+        endDate: "2023",
+        role: { es: "Analista de Datos", en: "Data Analyst" },
+        technologies: [],
+        achievements: {
             es: [
-                "Análisis de datos, reportes y automatización de procesos con herramientas de BI.",
+                "Desarrollé reportes y análisis de datos para apoyar la toma de decisiones.",
+                "Automaticé procesos recurrentes utilizando herramientas de BI.",
+                "[Agregar logro verificable adicional de este rol.]",
             ],
             en: [
-                "Data analysis, reporting, and process automation using BI tools.",
+                "Built reports and data analyses to support decision-making.",
+                "Automated recurring processes using BI tools.",
+                "[Add a verifiable achievement for this role.]",
             ],
         },
     },
     {
-        period: "2024 – 2024",
         Icon: Code2,
-        title: { es: "BI Analyst", en: "BI Analyst" },
-        descriptions: {
+        company: "",
+        location: "",
+        startDate: "2024",
+        endDate: "2024",
+        role: { es: "BI Analyst", en: "BI Analyst" },
+        technologies: [],
+        achievements: {
             es: [
-                "Modelado semántico y dashboards ejecutivos.",
-                "Análisis avanzado en Power BI.",
+                "Diseñé modelos semánticos para reportes ejecutivos en Power BI.",
+                "Realicé análisis avanzado de datos utilizando Power BI.",
+                "[Agregar logro verificable adicional de este rol.]",
             ],
             en: [
-                "Semantic modeling and executive dashboards.",
-                "Advanced analysis in Power BI.",
+                "Designed semantic models for executive reports in Power BI.",
+                "Performed advanced data analysis using Power BI.",
+                "[Add a verifiable achievement for this role.]",
             ],
         },
     },
     {
-        period: { es: "2025 – Actualidad", en: "2025 – Present" },
         Icon: Cloud,
-        title: { es: "Analítica Avanzada", en: "Advanced Analytics" },
-        descriptions: {
+        company: "",
+        location: "",
+        startDate: "2025",
+        endDate: { es: "Actualidad", en: "Present" },
+        role: { es: "Analítica Avanzada", en: "Advanced Analytics" },
+        technologies: [],
+        achievements: {
             es: [
-                "Modelos predictivos y forecasting.",
-                "Integración de datos en la nube.",
+                "Desarrollé modelos predictivos y de forecasting.",
+                "Integré datos en la nube como parte de soluciones analíticas.",
+                "[Agregar logro verificable adicional de este rol.]",
             ],
             en: [
-                "Predictive models and forecasting.",
-                "Cloud data integration.",
+                "Developed predictive and forecasting models.",
+                "Integrated cloud data as part of analytical solutions.",
+                "[Add a verifiable achievement for this role.]",
             ],
         },
     },

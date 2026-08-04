@@ -8,6 +8,17 @@ export async function generateStaticParams() {
     }));
 }
 
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const project = projects.find((p) => p.slug === slug);
+    if (!project) return {};
+
+    return {
+        title: project.es.title,
+        description: project.es.description,
+    };
+}
+
 export default async function ProjectDetailPage({ params }) {
     const { slug } = await params;
     const project = projects.find((p) => p.slug === slug);

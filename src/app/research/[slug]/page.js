@@ -8,6 +8,17 @@ export async function generateStaticParams() {
     }));
 }
 
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const article = articles.find((a) => a.slug === slug);
+    if (!article) return {};
+
+    return {
+        title: article.es.title,
+        description: article.es.excerpt,
+    };
+}
+
 export default async function ArticleDetailPage({ params }) {
     const { slug } = await params;
     const article = articles.find((a) => a.slug === slug);

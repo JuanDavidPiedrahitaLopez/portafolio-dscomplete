@@ -34,6 +34,12 @@ export function useScrollReveal(className, { direction = "left", distance = 48 }
             .${className}.visible {
                 opacity: 1;
                 transform: translate(0, 0);
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .${className} {
+                    transition-duration: 0.01ms !important;
+                    transform: none !important;
+                }
             }`
         );
 
