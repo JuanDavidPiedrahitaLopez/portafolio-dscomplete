@@ -117,7 +117,7 @@ export default function Hero() {
                                 scrollToSection("investigacion");
                                 window.history.replaceState(null, "", "#investigacion");
                             }}
-                            className="text-sm font-medium text-[#4aa3ff] hover:text-blue-300 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
+                            className="text-sm font-medium text-[#2dd4bf] hover:text-teal-300 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf] rounded-sm"
                         >
                             {t.hero.ctaResearch} →
                         </a>
