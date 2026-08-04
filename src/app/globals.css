@@ -14,6 +14,14 @@
 
   body {
     background-color: #0B0F14;
+    /* Gradiente único, fijo al viewport, compartido por toda la página.
+       Secciones con fondo opaco propio (Hero, Navbar, Footer) lo tapan
+       en su área; el resto lo deja ver sin "cortes" entre secciones. */
+    background-image:
+      radial-gradient(560px 560px at calc(100% + 120px) -120px, rgba(30, 58, 138, 0.14), transparent 70%),
+      radial-gradient(420px 420px at -120px calc(100% + 120px), rgba(20, 184, 166, 0.12), transparent 70%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: #ffffff;
     font-family: system-ui, -apple-system, sans-serif;
   }

@@ -6,7 +6,6 @@ import ArticleCard from "./ArticleCard";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import { useScrollReveal } from "@/lib/useScrollReveal";
-import SectionGlow from "@/components/SectionGlow";
 
 export default function ResearchSection() {
     const { lang } = useLanguage();
@@ -14,7 +13,7 @@ export default function ResearchSection() {
     const containerRef = useScrollReveal("reveal-item", { direction: "left", distance: 40 });
 
     return (
-        <section className="relative w-full scroll-mt-24 overflow-hidden" id="investigacion" ref={containerRef} style={{
+        <section className="w-full scroll-mt-24" id="investigacion" ref={containerRef} style={{
             width: "100%",
             paddingLeft: "8%",
             paddingTop: "2%",
@@ -22,9 +21,7 @@ export default function ResearchSection() {
             paddingRight: "8%"
         }} >
 
-            <SectionGlow />
-
-            <div className="relative z-10 mx-auto">
+            <div className="mx-auto">
 
                 {/* HEADER */}
                 <div className="reveal-item flex justify-between items-center flex-wrap gap-3 mb-10">

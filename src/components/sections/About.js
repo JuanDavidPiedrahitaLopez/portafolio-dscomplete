@@ -4,7 +4,6 @@ import { User, Target, MessageSquare, BookOpen } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import { useScrollReveal } from "@/lib/useScrollReveal";
-import SectionGlow from "@/components/SectionGlow";
 
 const VALUE_ICONS = { Target, MessageSquare, BookOpen };
 
@@ -15,13 +14,11 @@ export default function About() {
 
     return (
         <section id="sobre-mi"
-            className="relative w-full scroll-mt-24 overflow-hidden"
+            className="w-full scroll-mt-24"
         >
-            <SectionGlow />
-
             <div
                 ref={containerRef}
-                className="relative z-10 pt-14 md:pt-[2%]"
+                className="pt-14 md:pt-[2%]"
                 style={{
                     paddingLeft: "8%",
                     paddingRight: "8%",

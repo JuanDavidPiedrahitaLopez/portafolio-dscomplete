@@ -6,7 +6,6 @@ import { education } from "@/data/education";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import EducationItem from "@/components/EducationItem";
-import SectionGlow from "@/components/SectionGlow";
 
 // Estilos de animación inyectados una sola vez
 const ANIMATION_CSS = `
@@ -121,7 +120,7 @@ export default function EducationSection() {
     return (
         <section id="educacion"
             ref={sectionRef}
-            className="relative w-full scroll-mt-24 overflow-hidden"
+            className="w-full scroll-mt-24"
             style={{
                 paddingLeft: "8%",
                 paddingRight: "8%",
@@ -129,10 +128,6 @@ export default function EducationSection() {
                 paddingBottom: "2%",
             }}
         >
-            <SectionGlow />
-
-            <div className="relative z-10">
-
             {/* Título */}
             <div className="flex items-center gap-3 mb-6 edu-item" data-delay="0">
                 <GraduationCap size={20} color="#2dd4bf" strokeWidth={1.8} />
@@ -226,8 +221,6 @@ export default function EducationSection() {
                         </div>
                     </div>
                 ))}
-            </div>
-
             </div>
         </section>
     );

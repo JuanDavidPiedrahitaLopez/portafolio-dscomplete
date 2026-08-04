@@ -6,7 +6,6 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import TechnologyBadge from "@/components/TechnologyBadge";
-import SectionGlow from "@/components/SectionGlow";
 
 const GROUPS = [
     { key: "professional", Icon: Building2 },
@@ -20,16 +19,12 @@ export default function Skills() {
     const containerRef = useScrollReveal("skills-item", { direction: "left", distance: 40 });
 
     return (
-        <section id="habilidades" ref={containerRef} className="relative w-full scroll-mt-24 overflow-hidden" style={{
+        <section id="habilidades" ref={containerRef} className="w-full scroll-mt-24" style={{
             paddingLeft: "8%",
             paddingRight: "8%",
             paddingTop: "2%",
             paddingBottom: "2%",
         }}>
-            <SectionGlow />
-
-            <div className="relative z-10">
-
             <div className="flex items-center gap-3 mb-10 skills-item">
                 <Sigma size={20} color="#4aa3ff" strokeWidth={1.8} />
                 <h2 className="text-white font-bold text-[22px] leading-tight">
@@ -64,8 +59,6 @@ export default function Skills() {
                         </div>
                     );
                 })}
-            </div>
-
             </div>
         </section>
     );

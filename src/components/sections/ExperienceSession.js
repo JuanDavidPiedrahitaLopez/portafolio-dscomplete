@@ -6,7 +6,6 @@ import { experiences } from "@/data/experience";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 import ExperienceItem from "@/components/ExperienceItem";
-import SectionGlow from "@/components/SectionGlow";
 
 // Estilos de animación inyectados una sola vez
 const ANIMATION_CSS = `
@@ -123,7 +122,7 @@ export default function ExperienceSection() {
     return (
         <section id="experiencia"
             ref={sectionRef}
-            className="relative w-full overflow-hidden"
+            className="w-full"
             style={{
                 paddingLeft: "8%",
                 paddingRight: "8%",
@@ -131,10 +130,6 @@ export default function ExperienceSection() {
                 paddingBottom: "2%",
             }}
         >
-            <SectionGlow />
-
-            <div className="relative z-10">
-
             {/* Título */}
             <div className="flex items-center gap-3 mb-6 exp-item" data-delay="0">
                 <BriefcaseBusiness size={20} color="#2dd4bf" strokeWidth={1.8} />
@@ -240,8 +235,6 @@ export default function ExperienceSection() {
                         </div>
                     </div>
                 ))}
-            </div>
-
             </div>
         </section>
     );
