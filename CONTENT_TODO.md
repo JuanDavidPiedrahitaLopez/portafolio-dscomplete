@@ -60,18 +60,23 @@ Analyst, Analítica Avanzada):
 
 ## Educación (`src/data/education.js`)
 
-Sección nueva (2026-08-04), agregada con un solo registro totalmente
-placeholder porque no se confirmó ningún dato académico real:
+Sección agregada el 2026-08-04. Ya tiene contenido real:
 
-- **Institución, ubicación, fechas**: vacíos.
-- **Título obtenido**: `[PLACEHOLDER: título obtenido]` — reemplaza con
-  el nombre real del programa (p. ej. "Licenciatura en Matemáticas").
-- **Detalle**: un placeholder `[Agregar detalle verificable...]` para
-  una línea de énfasis, proyecto de grado, tesis, etc.
-- El enlace "Educación" ya aparece en la navbar (`#educacion`) y la
-  sección se muestra en la página principal entre Experiencia y
-  Habilidades, aunque el contenido siga siendo un placeholder. Agrega
-  más objetos al arreglo `education` si tienes más de un título.
+- **Matemático** — Universidad de Antioquia (UdeA), 2020–2024.
+- **Maestría en Matemáticas** — Universidad de Antioquia (UdeA), 2023–Actualidad.
+
+**Nota**: pediste "de 2024 a 2020" para el pregrado, que asumí como un
+orden invertido por error de tipeo y lo dejé como 2020–2024
+(cronológicamente coherente). Avísame si en realidad querías otras
+fechas.
+
+- **Ubicación**: quedó vacía en ambos registros (no se proporcionó
+  ciudad/sede). El campo ya está listo, agrégala si quieres que se
+  muestre.
+- No se agregó ningún detalle adicional (línea de énfasis, tesis,
+  proyecto de grado) porque no se mencionó ninguno — el campo `details`
+  es opcional y puede agregarse a cada objeto en `education.js` cuando
+  quieras.
 
 ## Proyectos (`src/data/projects.js`)
 

@@ -1,22 +1,26 @@
 import { GraduationCap } from "lucide-react";
 
-// PLACEHOLDER: completa con tu formación académica real (institución,
-// ubicación, fechas, título obtenido y detalles verificables).
-// Ver CONTENT_TODO.md.
 export const education = [
     {
         Icon: GraduationCap,
-        institution: "",
+        institution: "Universidad de Antioquia (UdeA)",
         location: "",
-        startDate: "",
-        endDate: "",
+        startDate: "2020",
+        endDate: "2024",
         degree: {
-            es: "[PLACEHOLDER: título obtenido]",
-            en: "[PLACEHOLDER: degree obtained]",
+            es: "Matemático",
+            en: "Bachelor's Degree in Mathematics",
         },
-        details: {
-            es: ["[Agregar detalle verificable, p. ej. línea de énfasis o proyecto de grado.]"],
-            en: ["[Add a verifiable detail, e.g. area of focus or capstone project.]"],
+    },
+    {
+        Icon: GraduationCap,
+        institution: "Universidad de Antioquia (UdeA)",
+        location: "",
+        startDate: "2023",
+        endDate: { es: "Actualidad", en: "Present" },
+        degree: {
+            es: "Maestría en Matemáticas",
+            en: "Master's Degree in Mathematics",
         },
     },
 ];
