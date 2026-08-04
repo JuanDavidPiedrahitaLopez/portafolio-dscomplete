@@ -7,6 +7,7 @@ export const translations = {
                 { label: "Proyectos", id: "proyectos" },
                 { label: "Investigación", id: "investigacion" },
                 { label: "Experiencia", id: "experiencia" },
+                { label: "Educación", id: "educacion" },
             ],
             contact: "Contacto",
             menuAria: "Menú",
@@ -72,6 +73,9 @@ export const translations = {
         },
         experienceSection: {
             title: "Experiencia",
+        },
+        educationSection: {
+            title: "Educación",
         },
         skillsSection: {
             title: "Habilidades",
@@ -208,6 +212,7 @@ export const translations = {
                 { label: "Projects", id: "proyectos" },
                 { label: "Research", id: "investigacion" },
                 { label: "Experience", id: "experiencia" },
+                { label: "Education", id: "educacion" },
             ],
             contact: "Contact",
             menuAria: "Menu",
@@ -272,6 +277,9 @@ export const translations = {
         },
         experienceSection: {
             title: "Experience",
+        },
+        educationSection: {
+            title: "Education",
         },
         skillsSection: {
             title: "Skills",

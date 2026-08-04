@@ -58,6 +58,21 @@ Analyst, Analítica Avanzada):
   proveedor) se dejó `technologies: []` — confirma las herramientas
   exactas si quieres que aparezcan como íconos.
 
+## Educación (`src/data/education.js`)
+
+Sección nueva (2026-08-04), agregada con un solo registro totalmente
+placeholder porque no se confirmó ningún dato académico real:
+
+- **Institución, ubicación, fechas**: vacíos.
+- **Título obtenido**: `[PLACEHOLDER: título obtenido]` — reemplaza con
+  el nombre real del programa (p. ej. "Licenciatura en Matemáticas").
+- **Detalle**: un placeholder `[Agregar detalle verificable...]` para
+  una línea de énfasis, proyecto de grado, tesis, etc.
+- El enlace "Educación" ya aparece en la navbar (`#educacion`) y la
+  sección se muestra en la página principal entre Experiencia y
+  Habilidades, aunque el contenido siga siendo un placeholder. Agrega
+  más objetos al arreglo `education` si tienes más de un título.
+
 ## Proyectos (`src/data/projects.js`)
 
 Para los 4 proyectos:
