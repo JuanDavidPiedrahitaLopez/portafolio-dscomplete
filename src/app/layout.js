@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import BackToTop from "@/components/layout/BackToTop";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { siteConfig } from "@/config/site";
 
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
           <Footer />
+          <BackToTop />
         </LanguageProvider>
       </body>
     </html>

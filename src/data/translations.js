@@ -12,6 +12,9 @@ export const translations = {
             menuAria: "Menú",
             langToggleAria: "Cambiar a inglés",
         },
+        backToTop: {
+            aria: "Volver arriba",
+        },
         social: {
             github: "GitHub",
             linkedin: "LinkedIn",
@@ -209,6 +212,9 @@ export const translations = {
             contact: "Contact",
             menuAria: "Menu",
             langToggleAria: "Switch to Spanish",
+        },
+        backToTop: {
+            aria: "Back to top",
         },
         social: {
             github: "GitHub",
