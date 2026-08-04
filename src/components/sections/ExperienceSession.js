@@ -1,49 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { BriefcaseBusiness, GraduationCap, BarChart2, Code2, Cloud } from "lucide-react";
+import { BriefcaseBusiness } from "lucide-react";
+import { experiences } from "@/data/experience";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/data/translations";
 
-const experiences = [
-    {
-        period: "2021 – 2022",
-        title: "Docencia Universitaria",
-        descriptions: [
-            "Profesor de matemáticas y física.",
-            "Desarrollo de materiales y formación académica.",
-            "Profesor de matemáticas y física.",
-            "Desarrollo de materiales y formación académica.",
-
-        ],
-        Icon: GraduationCap,
-    },
-
-    {
-        period: "2023 – 2023",
-        title: "Analista de Datos",
-        descriptions: [
-            "Análisis de datos, reportes y automatización de procesos con herramientas de BI.",
-        ],
-        Icon: BarChart2,
-    },
-    {
-        period: "2024 – 2024",
-        title: "BI Analyst",
-        descriptions: [
-            "Modelado semántico y dashboards ejecutivos.",
-            "Análisis avanzado en Power BI.",
-        ],
-        Icon: Code2,
-    },
-    {
-        period: "2025 – Actualidad",
-        title: "Analítica Avanzada",
-        descriptions: [
-            "Modelos predictivos y forecasting.",
-            "Integración de datos en la nube.",
-        ],
-        Icon: Cloud,
-    },
-];
+function getLocalized(value, lang) {
+    return typeof value === "string" ? value : value[lang];
+}
 
 // Estilos de animación inyectados una sola vez
 const ANIMATION_CSS = `
@@ -131,6 +96,8 @@ function Descriptions({ items }) {
 }
 
 export default function ExperienceSection() {
+    const { lang } = useLanguage();
+    const t = translations[lang];
     const count = experiences.length;
     const sectionRef = useRef(null);
 
@@ -164,7 +131,7 @@ export default function ExperienceSection() {
             { threshold: 0.15 }
         );
 
-        targets.forEach((t) => observer.observe(t));
+        targets.forEach((node) => observer.observe(node));
 
         return () => observer.disconnect();
     }, []);
@@ -172,7 +139,7 @@ export default function ExperienceSection() {
     return (
         <section id="experiencia"
             ref={sectionRef}
-            className="w-full mt-20"
+            className="w-full"
             style={{
                 paddingLeft: "8%",
                 paddingRight: "8%",
@@ -184,12 +151,12 @@ export default function ExperienceSection() {
             <div className="flex items-center gap-3 mb-6 exp-item" data-delay="0">
                 <BriefcaseBusiness size={20} color="#2dd4bf" strokeWidth={1.8} />
                 <h2 className="text-white font-bold text-[22px] leading-tight">
-                    Experiencia
+                    {t.experienceSection.title}
                 </h2>
             </div>
 
             {/* ── DESKTOP: grid 4 columnas con línea + puntos integrados ── */}
-            <div className="hidden lg:block relative mb-2 top-6">
+            <div className="hidden lg:block relative mb-2 top-6 max-w-[1200px] mx-auto">
 
                 {/* Línea horizontal que cruza todo el grid, alineada al centro del icono (24px = mitad de 48px) */}
                 <div
@@ -206,7 +173,7 @@ export default function ExperienceSection() {
                     {experiences.map(({ period, title, descriptions, Icon }, i) => (
                         <div
                             key={i}
-                            className="exp-item flex flex-col gap-2"
+                            className="exp-item group flex flex-col gap-2"
                             data-delay={300 + i * 120}
                         >
                             {/* Icono con punto centrado encima */}
@@ -226,28 +193,18 @@ export default function ExperienceSection() {
                                         zIndex: 1,
                                     }}
                                 />
-                                <div
-                                    className="flex items-center justify-center rounded-full flex-shrink-0"
-                                    style={{
-                                        width: "48px",
-                                        height: "48px",
-                                        background: "#0d2231",
-                                        border: "1.5px solid #1e3a4a",
-                                        position: "relative",
-                                        zIndex: 2,
-                                    }}
-                                >
+                                <div className="relative z-[2] flex w-12 h-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#1e3a4a] bg-[#0d2231] transition-all duration-300 group-hover:border-[#2dd4bf]/70 group-hover:shadow-[0_0_16px_rgba(45,212,191,0.25)] group-hover:-translate-y-0.5">
                                     <Icon size={20} color="#2dd4bf" strokeWidth={1.8} />
                                 </div>
                             </div>
-                            <span style={{ fontSize: "12px", color: "#6b7280" }}>{period}</span>
+                            <span style={{ fontSize: "12px", color: "#6b7280" }}>{getLocalized(period, lang)}</span>
                             <h3
-                                className="text-white font-bold leading-snug"
+                                className="text-white font-bold leading-snug transition-colors duration-300 group-hover:text-[#2dd4bf]"
                                 style={{ fontSize: "15px" }}
                             >
-                                {title}
+                                {getLocalized(title, lang)}
                             </h3>
-                            <Descriptions items={descriptions} />
+                            <Descriptions items={getLocalized(descriptions, lang)} />
                         </div>
                     ))}
                 </div>
@@ -288,28 +245,20 @@ export default function ExperienceSection() {
 
                         {/* Columna derecha: contenido */}
                         <div
-                            className="exp-item flex flex-col gap-2 flex-1"
+                            className="exp-item group flex flex-col gap-2 flex-1"
                             data-delay={i * 150 + 80}
                         >
-                            <div
-                                className="flex items-center justify-center rounded-full flex-shrink-0"
-                                style={{
-                                    width: "44px",
-                                    height: "44px",
-                                    background: "#0d2231",
-                                    border: "1.5px solid #1e3a4a",
-                                }}
-                            >
+                            <div className="flex w-11 h-11 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#1e3a4a] bg-[#0d2231] transition-all duration-300 group-active:border-[#2dd4bf]/70">
                                 <Icon size={18} color="#2dd4bf" strokeWidth={1.8} />
                             </div>
-                            <span style={{ fontSize: "12px", color: "#6b7280" }}>{period}</span>
+                            <span style={{ fontSize: "12px", color: "#6b7280" }}>{getLocalized(period, lang)}</span>
                             <h3
                                 className="text-white font-bold leading-snug"
                                 style={{ fontSize: "15px" }}
                             >
-                                {title}
+                                {getLocalized(title, lang)}
                             </h3>
-                            <Descriptions items={descriptions} />
+                            <Descriptions items={getLocalized(descriptions, lang)} />
                         </div>
                     </div>
                 ))}

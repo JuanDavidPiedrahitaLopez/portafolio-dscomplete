@@ -1,9 +1,13 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/data/translations";
+
 export default function ContactForm() {
+  const { lang } = useLanguage();
+  const t = translations[lang];
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -11,7 +15,6 @@ export default function ContactForm() {
     message: "",
   });
   const [status, setStatus] = useState("idle");
-  const router = useRouter();
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -52,79 +55,67 @@ export default function ContactForm() {
         style={{
           paddingLeft: "8%",
           paddingRight: "8%",
-          paddingTop: "4%",
+          paddingTop: "2.5rem",
           paddingBottom: "6rem",
         }}
       >
         {/* Botón volver */}
 
-        <div className="flex justify-end mb-8">
+        <div className="flex justify-end mb-6">
           <Link
             href="/"
             className="inline-flex items-center gap-2 transition-all hover:gap-3"
             style={{ color: "#4aa3ff", fontSize: "14px", fontWeight: 500 }}
           >
-            <span>←</span> Volver
+            <span>←</span> {t.contact.back}
           </Link>
         </div>
 
         {/* Encabezado */}
         <div className="mb-16">
           <p className="text-blue-500 text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-            Contacto
+            {t.contact.eyebrow}
           </p>
           <h1
             className="text-white font-bold leading-tight mb-5"
             style={{ fontSize: "clamp(2.2rem, 4vw, 3.2rem)" }}
           >
-            Hablemos
+            {t.contact.title}
           </h1>
-          <p className="text-gray-400 text-base  leading-relaxed">
-            ¿Tienes un proyecto, propuesta o simplemente quieres conectar?
-            Escríbeme y te responderé pronto.
+          <p className="text-gray-400 text-base leading-relaxed max-w-[520px]">
+            {t.contact.description}
           </p>
         </div>
 
         {/* Grid */}
-        <div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
-          style={{ paddingTop: "2vh" }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* IZQUIERDA */}
-          <div className="flex flex-col gap-5 ">
-            {[
-              {
-                icon: "✉",
-                label: "Email",
-                value: "tu@email.com",
-                sub: "Respondo en menos de 24h",
-              },
-              {
-                icon: "💼",
-                label: "LinkedIn",
-                value: "/in/tu-perfil",
-                sub: "Conectemos profesionalmente",
-              },
-              {
-                icon: "📍",
-                label: "Ubicación",
-                value: "Colombia",
-                sub: "Disponible para trabajo remoto",
-              },
-            ].map((item) => (
+          <div className="flex flex-col gap-5">
+            {t.contact.info.map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-5 pl-20 pr-6 py-6 min-h-[88px] rounded-xl border border-[#1a2235] bg-[#080c14]"
+                className="flex items-center gap-5 px-6 py-6 min-h-[88px] rounded-xl border border-[#1a2235] bg-[#080c14] transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-0.5"
               >
-                <div className="w-12 h-12 translate-x-3 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0 text-xl">
+                <div className="w-12 h-12 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0 text-xl transition-colors duration-300">
                   {item.icon}
                 </div>
 
-                <div className="flex flex-col gap-0.5">
+                <div className="flex flex-col gap-0.5 min-w-0">
                   <p className="text-blue-500 text-xs font-semibold tracking-[0.2em] uppercase">
                     {item.label}
                   </p>
-                  <p className="text-white text-sm font-medium">{item.value}</p>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-white text-sm font-medium break-words transition-colors duration-200 hover:text-blue-400"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="text-white text-sm font-medium break-words">{item.value}</p>
+                  )}
                   <p className="text-gray-500 text-xs">{item.sub}</p>
                 </div>
               </div>
@@ -134,39 +125,39 @@ export default function ContactForm() {
             <div className="flex items-center gap-3 mt-4 px-2">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
               <p className="text-gray-400 text-sm">
-                Disponible para nuevos proyectos
+                {t.contact.available}
               </p>
             </div>
           </div>
 
           {/* DERECHA — formulario */}
-          <div className="rounded-2xl border border-[#1a2235] bg-[#080c14] overflow-hidden relative lg:-top-12">
+          <div className="rounded-2xl border border-[#1a2235] bg-[#080c14] overflow-hidden">
             {/* Línea azul superior */}
             <div className="h-[3px] w-full bg-gradient-to-r from-blue-600 via-blue-400 to-transparent" />
 
             <form
               onSubmit={handleSubmit}
-              className="p-80 flex flex-col gap-6"
+              className="flex flex-col gap-6"
               style={{ padding: "10%" }}
             >
               {/* Nombre + Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
                   <label className="text-gray-400 text-xs font-semibold tracking-[0.15em] uppercase">
-                    Nombre
+                    {t.contact.form.nameLabel}
                   </label>
                   <input
                     name="name"
                     value={form.name}
                     onChange={handleChange}
                     required
-                    placeholder="Tu nombre"
-                    className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-4 h-[46px] outline-none transition-all duration-200 placeholder:text-gray-700"
+                    placeholder={t.contact.form.namePlaceholder}
+                    className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-6 h-[46px] outline-none transition-all duration-200 placeholder:text-gray-700"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-gray-400 text-xs font-semibold tracking-[0.15em] uppercase">
-                    Email
+                    {t.contact.form.emailLabel}
                   </label>
                   <input
                     name="email"
@@ -174,8 +165,8 @@ export default function ContactForm() {
                     value={form.email}
                     onChange={handleChange}
                     required
-                    placeholder="tu@email.com"
-                    className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-4 h-[46px] outline-none transition-all duration-200 placeholder:text-gray-700"
+                    placeholder={t.contact.form.emailPlaceholder}
+                    className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-6 h-[46px] outline-none transition-all duration-200 placeholder:text-gray-700"
                   />
                 </div>
               </div>
@@ -183,22 +174,22 @@ export default function ContactForm() {
               {/* Asunto — ancho completo */}
               <div className="flex flex-col gap-2">
                 <label className="text-gray-400 text-xs font-semibold tracking-[0.15em] uppercase">
-                  Asunto
+                  {t.contact.form.subjectLabel}
                 </label>
                 <input
                   name="subject"
                   value={form.subject}
                   onChange={handleChange}
                   required
-                  placeholder="¿En qué puedo ayudarte?"
-                  className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-4 h-[46px] outline-none transition-all duration-200 placeholder:text-gray-700"
+                  placeholder={t.contact.form.subjectPlaceholder}
+                  className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-6 h-[46px] outline-none transition-all duration-200 placeholder:text-gray-700"
                 />
               </div>
 
               {/* Mensaje — más alto */}
               <div className="flex flex-col gap-2">
                 <label className="text-gray-400 text-xs font-semibold tracking-[0.15em] uppercase">
-                  Mensaje
+                  {t.contact.form.messageLabel}
                 </label>
                 <textarea
                   name="message"
@@ -206,8 +197,8 @@ export default function ContactForm() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  placeholder="Cuéntame sobre tu proyecto..."
-                  className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-4 py-4 outline-none transition-all duration-200 placeholder:text-gray-700 resize-none"
+                  placeholder={t.contact.form.messagePlaceholder}
+                  className="bg-[#0a0f1a] border border-[#1a2235] focus:border-blue-500 text-white text-sm rounded-lg px-6 py-4 outline-none transition-all duration-200 placeholder:text-gray-700 resize-none"
                 />
               </div>
 
@@ -215,15 +206,13 @@ export default function ContactForm() {
               {status === "success" && (
                 <div className="flex items-center gap-3 text-green-400 text-sm bg-green-900/20 border border-green-900/40 rounded-lg px-4 py-3">
                   <span>✓</span>
-                  <span>
-                    Mensaje enviado correctamente. ¡Te responderé pronto!
-                  </span>
+                  <span>{t.contact.form.success}</span>
                 </div>
               )}
               {status === "error" && (
                 <div className="flex items-center gap-3 text-red-400 text-sm bg-red-900/20 border border-red-900/40 rounded-lg px-4 py-3">
                   <span>✕</span>
-                  <span>Hubo un error al enviar. Intenta de nuevo.</span>
+                  <span>{t.contact.form.error}</span>
                 </div>
               )}
 
@@ -236,12 +225,12 @@ export default function ContactForm() {
                 {status === "loading" ? (
                   <>
                     <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Enviando...
+                    {t.contact.form.sending}
                   </>
                 ) : status === "success" ? (
-                  "✓ Mensaje enviado"
+                  t.contact.form.sent
                 ) : (
-                  "Enviar mensaje →"
+                  t.contact.form.submit
                 )}
               </button>
             </form>

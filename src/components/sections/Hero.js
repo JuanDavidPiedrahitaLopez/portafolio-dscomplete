@@ -1,6 +1,14 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/data/translations";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 export default function Hero() {
+    const { lang } = useLanguage();
+    const t = translations[lang];
+
     return (
         <section id="inicio" className="bg-[#06080d] overflow-hidden h-full scroll-mt-24">
 
@@ -43,36 +51,55 @@ export default function Hero() {
                     style={{ paddingLeft: "8%" }}
                 >
                     <p className="text-blue-500 text-xs font-semibold tracking-[0.2em] uppercase">
-                        Matemático · Analista de Datos · Data Scientist
+                        {t.hero.eyebrow}
                     </p>
 
                     <h1
                         className="text-white font-bold leading-tight"
                         style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)" }}
                     >
-                        Matemático aplicado<br />
-                        a <span className="text-blue-400">analítica, BI</span> y<br />
-                        modelos de <span className="text-blue-400">predicción.</span>
+                        {t.hero.titleParts.map((part, i) =>
+                            part.break ? (
+                                <br key={i} />
+                            ) : (
+                                <span key={i} className={part.highlight ? "text-blue-400" : undefined}>
+                                    {part.text}
+                                </span>
+                            )
+                        )}
                     </h1>
 
                     <p className="text-gray-400 text-base leading-relaxed max-w-[480px]">
-                        Transformo datos en decisiones mediante modelos matemáticos,
-                        visualizaciones efectivas y soluciones analíticas escalables.
+                        {t.hero.description}
                     </p>
 
                     {/* BOTONES */}
                     <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full md:w-auto items-start">
-                        <button className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 h-[44px] 
-                            w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px] 
-                            rounded-md text-sm font-medium transition">
-                            Ver proyectos →
-                        </button>
+                        <a
+                            href="#proyectos"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                scrollToSection("proyectos");
+                                window.history.replaceState(null, "", "#proyectos");
+                            }}
+                            className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 h-[44px]
+                            w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px]
+                            rounded-md text-sm font-medium transition-all duration-200">
+                            {t.hero.ctaProjects}
+                        </a>
 
-                        <button className="flex items-center justify-center gap-2 border border-gray-600 hover:border-blue-500 hover:bg-[#0f1623] text-gray-300 hover:text-white px-6 h-[44px] 
-                            w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px] 
-                            rounded-md text-sm font-medium transition">
-                            Ver investigación
-                        </button>
+                        <a
+                            href="#investigacion"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                scrollToSection("investigacion");
+                                window.history.replaceState(null, "", "#investigacion");
+                            }}
+                            className="flex items-center justify-center gap-2 border border-gray-600 hover:border-blue-500 hover:bg-[#0f1623] text-gray-300 hover:text-white px-6 h-[44px]
+                            w-full sm:w-auto min-w-[180px] max-w-[240px] md:w-[180px]
+                            rounded-md text-sm font-medium transition-all duration-200">
+                            {t.hero.ctaResearch}
+                        </a>
                     </div>
                 </div>
 
@@ -90,50 +117,25 @@ export default function Hero() {
                     paddingBottom: "2.5rem",
                 }}
             >
-                {/* CARD 1 */}
-                <div className="flex items-center gap-5 px-6 py-5 rounded-xl border border-[#1a2235] bg-[#080c14] min-h-[110px]"
-                    style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "2rem", paddingBottom: "2.5rem" }}
-                >
-                    <div className="w-14 h-14 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0">
-                        <span className="text-blue-400 text-4xl font-semibold">Σ</span>
+                {t.hero.cards.map((card, i) => (
+                    <div
+                        key={i}
+                        className="flex items-center gap-5 px-6 py-5 rounded-xl border border-[#1a2235] bg-[#080c14] min-h-[110px] transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1"
+                        style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "2rem", paddingBottom: "2.5rem" }}
+                    >
+                        <div className="w-14 h-14 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0 transition-colors duration-300">
+                            <span className={i === 0 ? "text-blue-400 text-4xl font-semibold" : "text-blue-400 text-xl"}>
+                                {card.icon}
+                            </span>
+                        </div>
+                        <div className="flex flex-col gap-1 min-w-0">
+                            <p className="text-white text-sm font-semibold">{card.title}</p>
+                            <p className="text-gray-400 text-xs leading-relaxed">
+                                {card.description}
+                            </p>
+                        </div>
                     </div>
-                    <div className="flex flex-col gap-1">
-                        <p className="text-white text-sm font-semibold">Matemática y Modelado</p>
-                        <p className="text-gray-400 text-xs leading-relaxed">
-                            Fundamentos en análisis, probabilidad y estadística para construir modelos rigurosos y soluciones efectivas.
-                        </p>
-                    </div>
-                </div>
-
-                {/* CARD 2 */}
-                <div className="flex items-center gap-5 px-6 py-5 rounded-xl border border-[#1a2235] bg-[#080c14] min-h-[110px]"
-                    style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "2rem", paddingBottom: "2.5rem" }}
-                >
-                    <div className="w-14 h-14 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0">
-                        <span className="text-blue-400 text-xl">📊</span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <p className="text-white text-sm font-semibold">BI y Analítica</p>
-                        <p className="text-gray-400 text-xs leading-relaxed">
-                            Experiencia en Power BI, DAX y SQL para transformar datos en información estratégica.
-                        </p>
-                    </div>
-                </div>
-
-                {/* CARD 3 */}
-                <div className="flex items-center gap-5 px-6 py-5 rounded-xl border border-[#1a2235] bg-[#080c14] min-h-[110px]"
-                    style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "2rem", paddingBottom: "2.5rem" }}
-                >
-                    <div className="w-14 h-14 rounded-lg bg-[#0f1a2e] border border-blue-900/40 flex items-center justify-center shrink-0">
-                        <span className="text-blue-400 text-xl">📈</span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <p className="text-white text-sm font-semibold">Predicción y ML</p>
-                        <p className="text-gray-400 text-xs leading-relaxed">
-                            Aplicación de modelos de series de tiempo y machine learning con validación robusta.
-                        </p>
-                    </div>
-                </div>
+                ))}
             </div>
         </section>
     );
