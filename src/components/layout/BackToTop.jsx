@@ -6,33 +6,17 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
 
 const SHOW_THRESHOLD = 120;
-const GAP_ABOVE_FOOTER = 16;
 
 export default function BackToTop() {
     const { lang } = useLanguage();
     const t = translations[lang];
     const [scrolled, setScrolled] = useState(false);
-    const [lift, setLift] = useState(0);
 
     useEffect(() => {
-        const footer = document.querySelector("footer");
-
-        const handleScroll = () => {
-            setScrolled(window.scrollY > SHOW_THRESHOLD);
-
-            if (footer) {
-                const overlap = window.innerHeight - footer.getBoundingClientRect().top;
-                setLift(overlap > 0 ? overlap + GAP_ABOVE_FOOTER : 0);
-            }
-        };
-
+        const handleScroll = () => setScrolled(window.scrollY > SHOW_THRESHOLD);
         handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
-        window.addEventListener("resize", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll);
-        };
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     const handleClick = () => {
@@ -46,8 +30,7 @@ export default function BackToTop() {
             onClick={handleClick}
             aria-label={t.backToTop.aria}
             title={t.backToTop.aria}
-            style={{ bottom: `calc(1.5rem + ${lift}px)` }}
-            className={`fixed right-6 z-40 flex items-center justify-center w-11 h-11 rounded-full border border-[#1e3a4a] bg-[#0d2231] text-[#2dd4bf] shadow-lg shadow-black/30 transition-all duration-300 hover:border-[#2dd4bf] hover:text-white hover:shadow-[0_0_16px_rgba(45,212,191,0.35)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf] ${
+            className={`fixed bottom-6 right-6 z-40 flex items-center justify-center w-11 h-11 rounded-full border border-[#1e3a4a] bg-[#0d2231] text-[#2dd4bf] shadow-lg shadow-black/30 transition-all duration-300 hover:border-[#2dd4bf] hover:text-white hover:shadow-[0_0_16px_rgba(45,212,191,0.35)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2dd4bf] ${
                 scrolled ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"
             }`}
         >
