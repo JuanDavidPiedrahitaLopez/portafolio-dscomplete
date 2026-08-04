@@ -18,7 +18,7 @@ export const siteConfig = {
         es: "/cv/juan-david-piedrahita-lopez-cv.pdf",
         en: "/cv/juan-david-piedrahita-lopez-cv-en.pdf",
     },
-    siteUrl: "", // PLACEHOLDER: falta dominio definitivo (ej. https://tudominio.com)
+    siteUrl: "https://portfoliods-juandavlopez.vercel.app",
 };
 
 // Enlaces sociales reutilizados en Hero, Contacto y Footer.

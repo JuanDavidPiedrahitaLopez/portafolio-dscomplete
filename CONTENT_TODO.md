@@ -11,10 +11,19 @@ documento.
 - **GitHub**: `siteConfig.github` está vacío. El enlace de GitHub no se
   muestra en ningún lado (Hero, Footer) hasta que se complete — no se
   renderiza como `#`, simplemente se omite.
-- **Dominio definitivo**: `siteConfig.siteUrl` está vacío. `robots.js` y
-  `sitemap.js` usan `https://tudominio.com` como marcador de posición
-  mientras tanto. **Actualizar antes de publicar**, o el sitemap
-  apuntará a un dominio incorrecto.
+- **Dominio**: `siteConfig.siteUrl` ahora apunta a
+  `https://portfoliods-juandavlopez.vercel.app` (el dominio de Vercel).
+  `robots.js`, `sitemap.js` y el `metadataBase` de `layout.js` ya lo
+  usan — el warning de build por `metadataBase` faltante desapareció.
+  Si más adelante conectas un dominio propio, solo actualiza este
+  valor y ambos archivos se ajustan automáticamente.
+- **Indexación en Google**: el código ya genera `robots.txt` y
+  `sitemap.xml` correctamente, pero eso no basta para aparecer en
+  Google — falta el paso manual de verificar el sitio en
+  [Google Search Console](https://search.google.com/search-console) y
+  enviarle la URL del sitemap
+  (`https://portfoliods-juandavlopez.vercel.app/sitemap.xml`). Ese
+  paso lo tienes que hacer tú desde tu cuenta de Google.
 - **Nombre completo**: se usó "Juan David Piedrahita López", derivado de
   la URL de LinkedIn que diste (`/in/juan-david-piedrahita-lópez`).
   Confirma que es el nombre exacto que quieres mostrar.

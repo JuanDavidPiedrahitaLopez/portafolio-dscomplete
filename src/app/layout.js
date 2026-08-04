@@ -8,6 +8,7 @@ import { siteConfig } from "@/config/site";
 const title = `${siteConfig.name} | Analítica, BI y modelación predictiva`;
 
 export const metadata = {
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: title,
     template: `%s | ${siteConfig.name}`,
